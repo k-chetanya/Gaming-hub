@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Two-Player Memory Game</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="Memory.css" />
+
+</head>
+
+<body>
+  <a href="index.html">
+    <div class="back">Back</div></a>
+  <div id="timer">Time:0 s</div>
+
+  <header class="header">
+    <h1>Memory Game</h1>
+  </header>
+
+  <div class="players">
+    <div class="player-card active" id=player1>
+      <h2>Player 1</h2>
+      <span id="score1">0</span>
+    </div>
+    <div class="player-card active" id=player2>
+      <h2>Player 2</h2>
+      <span id="score2">0</span>
+    </div>
+  </div>
+  <button id=restart>Restart</button>
+  <div class="game" id="game"></div>
+  <div class="winner"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <script>
+    (
+      () => {
+        const EMOJIS = ['🍎', '🍌', '🍇', '🍒', '🍉', '🍍', '🍓', '🥝'];
+        const DELAY = 900;
+        let first, second, lock, current = 1, p1 = 0, p2 = 0, matched = 0, sec = 0, timer;
+        const game = document.getElementById('game');
+        const p1Card = document.getElementById('player1');
+        const p2Card = document.getElementById('player2');
+        const s1 = document.getElementById('score1');
+        const s2 = document.getElementById('score2');
+        const timerEl = document.getElementById('timer');
+        const restart = document.getElementById('restart');
+        const winner = document.querySelector('.winner');
+
+        restart.addEventListener('click', init);
+
+        function init() {
+          first = second = null;
+          lock = false;
+          current = 1;
+          p1 = p2 = matched = sec = 0;
+
+          clearInterval(timer);
+          timerEl.textContent = `Time: 0 s`;
+          winner.innerHTML = '';
+          updateUI();
+
+          const deck = shuffle([...EMOJIS, ...EMOJIS]);
+          game.innerHTML = '';
+          deck.forEach(emoji => {
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.dataset.emoji = emoji;
+            card.addEventListener('click', flip);
+
+            card.addEventListener('mousedown', () => card.classList.add('shrink'));
+            card.addEventListener('mouseup', () => card.classList.remove('shrink'));
+            card.addEventListener('mouseleave', () => card.classList.remove('shrink'));
+
+            game.appendChild(card);
+          });
+
+          timer = setInterval(() => {
+            sec++;
+            timerEl.textContent = `Time: ${sec} s`;
+          }, 1000);
+        }
+
+
+        function flip() {
+          if (lock || this === first || this.classList.contains('matched')) return;
+
+          show(this);
+
+          if (!first) {
+            first = this;
+            return
+          }
+
+          second = this;
+          lock = true;
+
+          if (first.dataset.emoji === second.dataset.emoji) {
+            current === 1 ? ++p1 : ++p2;
+            matched++;
+            updateUI();
+
+            setTimeout(() => {
+              first.classList.add('matched');
+              second.classList.add('matched');
+              reset();
+              if (matched === EMOJIS.length) finish();
+            }, 300);
+          } else {
+            setTimeout(() => {
+              hide(first);
+              hide(second);
+              switchPlayer();
+              reset();
+            }, DELAY)
+          }
+        }
+
+        function shuffle(array) {
+          for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+          }
+          return array
+        };
+
+        const show = card => {
+          card.innerText = card.dataset.emoji;
+          card.classList.add('flipped');
+        };
+        const hide = card => {
+          card.innerText = '';
+          card.classList.remove('flipped');
+        };
+
+        const reset = () => {
+          first = second = null;
+          lock = false;
+        };
+
+        function switchPlayer() {
+          current = current === 1 ? 2 : 1;
+          updateUI();
+        }
+
+        function updateUI() {
+          s1.textContent = p1;
+          s2.textContent = p2;
+          p1Card.classList.toggle('active', current === 1);
+          p2Card.classList.toggle('active', current === 2);
+        }
+        const showConfetti = () => {
+          const count = 200,
+            defaults = { origin: { y: 0.7 } };
+
+          function fire(particleRatio, opts) {
+            confetti(
+              Object.assign({}, defaults, opts, {
+                particleCount: Math.floor(count * particleRatio),
+              })
+            );
+          }
+
+          fire(0.25, { spread: 26, startVelocity: 55 });
+          fire(0.2, { spread: 60 });
+          fire(0.35, { spread: 100, decay: 0.91, scalar: 0.8 });
+          fire(0.1, { spread: 120, startVelocity: 25, decay: 0.92, scalar: 1.2 });
+          fire(0.1, { spread: 120, startVelocity: 45 });
+        };
+
+
+        function finish() {
+          clearInterval(timer);
+          const msg = p1 === p2 ? `Its a Tie` :
+            p1 > p2 ? 'Player 1 wins 🎉' : 'Player 2 wins 🎉';
+
+          setTimeout(() => {
+            winner.innerHTML = `<h2>${msg}</h2>`
+            showConfetti();
+          }, 350)
+        }
+        init();
+       }
+
+    )();
+  </script> 
+
+</body>
+
+</html>

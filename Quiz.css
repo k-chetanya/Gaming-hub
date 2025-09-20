@@ -1,0 +1,130 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Poppins", sans-serif;
+}
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(to right, #6a11cb, #2575fc);
+    min-height: 100vh;
+    padding: 20px;
+}
+
+#container {
+    text-align: center;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    padding: 30px;
+    width: 100%;
+    max-width: 500px;
+    position: relative;
+}
+
+.subject-btn {
+    padding: 15px;
+    border: none;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+#geography { background: linear-gradient(135deg, #4CAF50, #8BC34A); }
+#history { background: linear-gradient(135deg, #FF5722, #FF9800); }
+#coding { background: linear-gradient(135deg, #2196F3, #03A9F4); }
+#science { background: linear-gradient(135deg, #9C27B0, #E91E63); }
+
+h1 {
+    color: #333;
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+#questions {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #444;
+}
+
+.option-btn {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 10px;
+    font-weight: bold;
+    background-color: #f1f1f1;
+    color: #333;
+    text-align: left;
+    padding-left: 20px;
+    margin-bottom: 10px;
+}
+
+.selected {
+    background-color: #4caf50 !important;
+    color: white !important;
+}
+
+.nav-btn {
+    background-color: #007bff;
+    color: white;
+    padding: 12px 20px;
+    width: 48%;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#submit {
+    background-color: #28a745;
+    color: white;
+    padding: 15px;
+    font-size: 18px;
+    margin-top: 15px;
+    width: 100%;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.nav-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+}
+
+#timer {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 10px 15px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.back {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 10px 15px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+}

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Responsive Chess with Visual Indicators</title>
+<link rel="stylesheet" href="chess.css"
+</head>
+<body>
+
+<div id="container">
+  <div class="nav-buttons">
+    <button class="back-button" onclick="window.location.href='index.html'">← Back</button>
+    <button class="undo-button" id="undo-btn">↩ Undo</button>
+  </div>
+  
+  <h1 class="header">Ultimate Chess Game</h1>
+  
+  <div id="chessboard"></div>
+  
+  <div id="game-info">
+    <div class="turn-indicator">
+      <div class="player-turn">
+        <div class="player-icon white-icon"></div>
+        <span id="white-player" class="active-player">White</span>
+      </div>
+      <div class="player-turn">
+        <div class="player-icon black-icon"></div>
+        <span id="black-player">Black</span>
+      </div>
+    </div>
+    
+    <div id="game-status" class="game-status status-normal">
+      <div>Game in progress</div>
+      <div class="status-message" id="status-message"></div>
+    </div>
+    
+    <div class="controls">
+      <button id="new-game-btn">New Game</button>
+      <button id="flip-board-btn">Flip Board</button>
+    </div>
+    <div id="promotion-modal" style="display:none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  background: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 20px rgba(0,0,0,0.2); z-index: 10;">
+  <h3>Choose Promotion</h3>
+  <div style="display: flex; gap: 15px; margin-top: 10px;">
+    <button onclick="promote('q')">♛</button>
+    <button onclick="promote('r')">♜</button>
+    <button onclick="promote('b')">♝</button>
+    <button onclick="promote('n')">♞</button>
+  </div>
+</div>
+<div id="overlay" style="display:none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.4); z-index: 5;"></div>
+
+  </div>
+</div>
+
+<script src="ChessEngine.js"></script>
+</body>
+</html>

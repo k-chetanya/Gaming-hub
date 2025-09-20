@@ -1,0 +1,153 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: system-ui, Arial, sans-serif;
+  background: linear-gradient(135deg, #c8e6c9, #e0f2f1);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.header {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  margin-top: 0.25rem;
+}
+
+h1 {
+  font-size: clamp(1.4rem, 5vw, 2rem);
+  text-align: center;
+}
+
+.players {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.player-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.6rem 1rem;
+  min-width: 120px;
+  border-radius: 10px;
+  color: #fff;
+  font-weight: 600;
+  transition: transform 0.25s, box-shadow 0.25s;
+  text-align: center;
+}
+
+#player1 {
+  background: linear-gradient(135deg, #43a047, #81c784);
+}
+
+#player2 {
+  background: linear-gradient(135deg, #e53935, #ee6d6d);
+}
+
+.player-card.active {
+  transform: scale(1.06);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.player-card h2 {
+  font-size: 1.1rem;
+  margin-bottom: 0.25rem;
+}
+
+.player-card span {
+  font-size: 1.4rem;
+}
+
+#restart {
+  padding: 0.45rem 1.2rem;
+  border: none;
+  border-radius: 6px;
+  background: #2196f3;
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: filter 0.2s;
+}
+
+#restart:hover {
+  filter: brightness(1.1);
+}
+
+.game {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.6rem;
+  width: 100%;
+  max-width: 500px;
+  padding: 0.4rem;
+}
+
+.card {
+  aspect-ratio: 1/1;
+  background: #37474f;
+  border-radius: 12px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: clamp(1.8rem, 6vw, 2.8rem);
+  user-select: none;
+  cursor: pointer;
+  transition: transform 0.3s, visibility 0.3s;
+}
+
+.card.flipped {
+  background: #4caf50;
+}
+
+.card.shrink {
+  transform: scale(0.96);
+}
+
+.card.matched {
+  visibility: hidden;
+}
+
+#timer {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 8px 15px;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.back {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 8px 15px;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+@media (max-width: 600px) {
+  .header {
+    margin-top: 40px;
+  }
+}
