@@ -25,8 +25,14 @@ Welcome to **Gaming Hub** – a fully responsive web-based platform that brings 
   - Castling
   - Special pawn moves (like **En Passant**)
 
-### 4️⃣ **[Your 4th Game]**
-*(Add a description here or remove this section if not needed.)*
+### 4️⃣ ❓ **Quiz Game**
+- Test your knowledge across **4 different subjects**:
+  - 💻 **Coding**
+  - 🧪 **Science**
+  - 🌍 **Geography**
+  - 📜 **History**
+- Multiple-choice format with instant feedback.
+- Great for learning while having fun!
 
 ---
 
